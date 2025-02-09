@@ -26,7 +26,7 @@ romanfontoptions: Ligatures=TeX
 sansfontoptions: Ligatures=TeX,Scale=MatchLowercase
 monofontoptions: Scale=MatchLowercase
 indent: true
-pdf-engine: xelatex
+pdf-engine: lualatex
 header-includes:
   - \linepenalty=10 # the penalty added to the badness of each line within a paragraph (no associated penalty node) Increasing the value makes tex try to have fewer lines in the paragraph.
   - \interlinepenalty=0 # value of the penalty (node) added after each line of a paragraph.
