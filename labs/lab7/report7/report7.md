@@ -1,56 +1,72 @@
 ---
-# Front matter
-lang: ru-RU
-title: "Лабораторная работа №7"
+## Front matter
+title: "Шаблон отчёта по лабораторной работе №7"
 subtitle: "Дисциплина: Математические основы защиты информации и информационной безопасности"
 author: "Миличевич Александра"
 
-# Formatting
+## Generic otions
+lang: ru-RU
 toc-title: "Содержание"
+
+## Bibliography
+bibliography: bib/cite.bib
+csl: pandoc/csl/gost-r-7-0-5-2008-numeric.csl
+
+## Pdf output format
 toc: true # Table of contents
-toc_depth: 2
-lof: true # Список рисунков
-lot: true # Список таблиц
+toc-depth: 2
+lof: true # List of figures
+lot: true # List of tables
 fontsize: 12pt
 linestretch: 1.5
-papersize: a4paper
-documentclass[english,russian]{babel}
-polyglossia-lang: russian
-polyglossia-otherlangs: english
-mainfont: Liberation Serif
-romanfont: Liberation Serif
-sansfont: Liberation Sans
-monofont: Liberation Mono
-mainfontoptions: Ligatures=TeX
-romanfontoptions: Ligatures=TeX
-sansfontoptions: Ligatures=TeX,Scale=MatchLowercase
-monofontoptions: Scale=MatchLowercase
+papersize: a4
+documentclass: scrreprt
+## I18n polyglossia
+polyglossia-lang:
+  name: russian
+  options:
+	- spelling=modern
+	- babelshorthands=true
+polyglossia-otherlangs:
+  name: english
+## I18n babel
+babel-lang: russian
+babel-otherlangs: english
+## Fonts
+mainfont: IBM Plex Serif
+romanfont: IBM Plex Serif
+sansfont: IBM Plex Sans
+monofont: IBM Plex Mono
+mathfont: STIX Two Math
+mainfontoptions: Ligatures=Common,Ligatures=TeX,Scale=0.94
+romanfontoptions: Ligatures=Common,Ligatures=TeX,Scale=0.94
+sansfontoptions: Ligatures=Common,Ligatures=TeX,Scale=MatchLowercase,Scale=0.94
+monofontoptions: Scale=MatchLowercase,Scale=0.94,FakeStretch=0.9
+mathfontoptions:
+## Biblatex
+biblatex: true
+biblio-style: "gost-numeric"
+biblatexoptions:
+  - parentracker=true
+  - backend=biber
+  - hyperref=auto
+  - language=auto
+  - autolang=other*
+  - citestyle=gost-numeric
+## Pandoc-crossref LaTeX customization
+figureTitle: "Рис."
+tableTitle: "Таблица"
+listingTitle: "Листинг"
+lofTitle: "Список иллюстраций"
+lotTitle: "Список таблиц"
+lolTitle: "Листинги"
+## Misc options
 indent: true
-pdf-engine: pdflatex
 header-includes:
-  - \usepackage[utf8]{inputenc}
-  - \usepackage[russian]{babel}
-  - \linepenalty=10 # the penalty added to the badness of each line within a paragraph (no associated penalty node) Increasing the value makes tex try to have fewer lines in the paragraph.
-  - \interlinepenalty=0 # value of the penalty (node) added after each line of a paragraph.
-  - \hyphenpenalty=50 # the penalty for line breaking at an automatically inserted hyphen
-  - \exhyphenpenalty=50 # the penalty for line breaking at an explicit hyphen
-  - \binoppenalty=700 # the penalty for breaking a line at a binary operator
-  - \relpenalty=500 # the penalty for breaking a line at a relation
-  - \clubpenalty=150 # extra penalty for breaking after first line of a paragraph
-  - \widowpenalty=150 # extra penalty for breaking before last line of a paragraph
-  - \displaywidowpenalty=50 # extra penalty for breaking before last line before a display math
-  - \brokenpenalty=100 # extra penalty for page breaking after a hyphenated line
-  - \predisplaypenalty=10000 # penalty for breaking before a display
-  - \postdisplaypenalty=0 # penalty for breaking after a display
-  - \floatingpenalty = 20000 # penalty for splitting an insertion (can only be split footnote in standard LaTeX)
-  - \raggedbottom # or \flushbottom
+  - \usepackage{indentfirst}
   - \usepackage{float} # keep figures where there are in the text
-  - \floatplacement{figure}{H} # keep figures where there are in the text 
+  - \floatplacement{figure}{H} # keep figures where there are in the text
 ---
-
-| **Дисциплина** | **Лабораторная**| **ФИО** |
-| ------ | ------ | ------- |
-| Математические основы защиты информации и информационной безопасности|  №7| Александра Миличевич |
 
 ##Цель лабораторной работы 
 
@@ -77,7 +93,7 @@ header-includes:
 
 1.  Используется функция `extended_euclidean(a, n)` для получения коэффициентов Безу.
 2.  Возвращается коэффициент `x` (второй элемент в кортеже), который является обратным к `a` по модулю `n`.
-![ modular inverse ](images/modular_inverse.jpg){ width=70% }
+![ modular inverse ](images/modular_inverse.jpg){#fig:001 width=70%}
 
 ### 2. Функция `pollard_step(x, a, b, params)`
 
@@ -100,7 +116,7 @@ header-includes:
    * Если `x % 3 == 1`: `x` умножается на `H` по модулю `P`, `b` увеличивается на 1 по модулю `Q`.
    * Если `x % 3 == 2`: `x` возводится в квадрат по модулю `P`, `a` и `b` умножаются на 2 по модулю `Q`.
 
-![ pollard step ](images/pollard_step.jpg){ width=70% }
+![ pollard step ](images/pollard_step.jpg){#fig:002 width=70%}
 
 ### 3. Функция `pollard_rho_discrete_log(generator, value, prime)`
 
@@ -130,7 +146,7 @@ header-includes:
     *   Если логарифм верный, то он возвращается.
     *   Если логарифм не верный (при `pow(generator, result, prime) != value`), то `result` увеличивается на `Q` и возвращается.
 
-![ pollard descrete log ](images/pollard_rho_descrete_log.jpg){ width=70% }
+![ pollard descrete log ](images/pollard_rho_descrete_log.jpg){#fig:003 width=70%}
 
 ### 4. Функция `verify(generator, value, prime, x)`
 
@@ -146,7 +162,7 @@ header-includes:
 *   **Выход:**
     *   `True`, если логарифм верный, `False` в противном случае.
 
-![ verify ](images/verify.jpg){ width=70% }
+![ verify ](images/verify.jpg){#fig:004 width=70%}
 
 #### Как работает:
 

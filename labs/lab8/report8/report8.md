@@ -1,60 +1,75 @@
 ---
-# Front matter
-lang: ru-RU
-title: "Лабораторная работа №8"
+## Front matter
+title: "Шаблон отчёта по лабораторной работе №1"
 subtitle: "Дисциплина: Математические основы защиты информации и информационной безопасности"
 author: "Миличевич Александра"
 
-# Formatting
+## Generic otions
+lang: ru-RU
 toc-title: "Содержание"
+
+## Bibliography
+bibliography: bib/cite.bib
+csl: pandoc/csl/gost-r-7-0-5-2008-numeric.csl
+
+## Pdf output format
 toc: true # Table of contents
-toc_depth: 2
-lof: true # Список рисунков
-lot: true # Список таблиц
+toc-depth: 2
+lof: true # List of figures
+lot: true # List of tables
 fontsize: 12pt
 linestretch: 1.5
-papersize: a4paper
-documentclass[english,russian]{babel}
-polyglossia-lang: russian
-polyglossia-otherlangs: english
-mainfont: Liberation Serif
-romanfont: Liberation Serif
-sansfont: Liberation Sans
-monofont: Liberation Mono
-mainfontoptions: Ligatures=TeX
-romanfontoptions: Ligatures=TeX
-sansfontoptions: Ligatures=TeX,Scale=MatchLowercase
-monofontoptions: Scale=MatchLowercase
+papersize: a4
+documentclass: scrreprt
+## I18n polyglossia
+polyglossia-lang:
+  name: russian
+  options:
+	- spelling=modern
+	- babelshorthands=true
+polyglossia-otherlangs:
+  name: english
+## I18n babel
+babel-lang: russian
+babel-otherlangs: english
+## Fonts
+mainfont: IBM Plex Serif
+romanfont: IBM Plex Serif
+sansfont: IBM Plex Sans
+monofont: IBM Plex Mono
+mathfont: STIX Two Math
+mainfontoptions: Ligatures=Common,Ligatures=TeX,Scale=0.94
+romanfontoptions: Ligatures=Common,Ligatures=TeX,Scale=0.94
+sansfontoptions: Ligatures=Common,Ligatures=TeX,Scale=MatchLowercase,Scale=0.94
+monofontoptions: Scale=MatchLowercase,Scale=0.94,FakeStretch=0.9
+mathfontoptions:
+## Biblatex
+biblatex: true
+biblio-style: "gost-numeric"
+biblatexoptions:
+  - parentracker=true
+  - backend=biber
+  - hyperref=auto
+  - language=auto
+  - autolang=other*
+  - citestyle=gost-numeric
+## Pandoc-crossref LaTeX customization
+figureTitle: "Рис."
+tableTitle: "Таблица"
+listingTitle: "Листинг"
+lofTitle: "Список иллюстраций"
+lotTitle: "Список таблиц"
+lolTitle: "Листинги"
+## Misc options
 indent: true
-pdf-engine: pdflatex
 header-includes:
-  - \usepackage[utf8]{inputenc}
-  - \usepackage[russian]{babel}
-  - \linepenalty=10 # the penalty added to the badness of each line within a paragraph (no associated penalty node) Increasing the value makes tex try to have fewer lines in the paragraph.
-  - \interlinepenalty=0 # value of the penalty (node) added after each line of a paragraph.
-  - \hyphenpenalty=50 # the penalty for line breaking at an automatically inserted hyphen
-  - \exhyphenpenalty=50 # the penalty for line breaking at an explicit hyphen
-  - \binoppenalty=700 # the penalty for breaking a line at a binary operator
-  - \relpenalty=500 # the penalty for breaking a line at a relation
-  - \clubpenalty=150 # extra penalty for breaking after first line of a paragraph
-  - \widowpenalty=150 # extra penalty for breaking before last line of a paragraph
-  - \displaywidowpenalty=50 # extra penalty for breaking before last line before a display math
-  - \brokenpenalty=100 # extra penalty for page breaking after a hyphenated line
-  - \predisplaypenalty=10000 # penalty for breaking before a display
-  - \postdisplaypenalty=0 # penalty for breaking after a display
-  - \floatingpenalty = 20000 # penalty for splitting an insertion (can only be split footnote in standard LaTeX)
-  - \raggedbottom # or \flushbottom
+  - \usepackage{indentfirst}
   - \usepackage{float} # keep figures where there are in the text
-  - \floatplacement{figure}{H} # keep figures where there are in the text 
+  - \floatplacement{figure}{H} # keep figures where there are in the text
 ---
 
-| **Дисциплина** | **Лабораторная**| **ФИО** |
-| ------ | ------ | ------- |
-| Математические основы защиты информации и информационной безопасности|  №8 | Александра Миличевич |
-
-
 ##Цель работы
-###Арифметика в системах счисления: Сложение и Вычитание
+###Арифметика в системах счисления: Сложение , Вычитание, Умножение и деление
 
 Этот документ описывает реализацию алгоритмов сложения и вычитания неотрицательных целых чисел в заданной системе счисления.
 
@@ -85,7 +100,7 @@ header-includes:
         *   Вычисляется новый перенос: `carry = digit_sum // base`.
 3.  **Разворот результата:** Список `result` разворачивается, так как цифры добавлялись в обратном порядке.
 4.  **Возврат результата:** Возвращается список `result`, представляющий сумму чисел.
-![addition ](images8/image_01.png){ width=70% }
+![addition ](images8/addition.jpg){#fig:001 width=70%}
 ### 2. Функция `subtraction(num1, num2, base)`
 
 Эта функция выполняет вычитание двух неотрицательных целых чисел в заданной системе счисления. Предполагается, что `num1 >= num2`.
@@ -118,8 +133,7 @@ header-includes:
 3.  **Разворот результата:** Список `result` разворачивается.
 4.  **Возврат результата:** Возвращается список `result`, представляющий разность чисел.
 
-![substruction ](images/image_01.png){ width=70% }
-
+![substruction ](images8/substraction.jpg){#fig:002 width=70%}
 
 ### 3. Функция `multiplication(num1, num2, base)`
 
@@ -151,7 +165,7 @@ header-includes:
 4.  **Добавление переноса:** Оставшийся перенос `carry` добавляется к `result[j]`.
 5.  **Удаление ведущих нулей:** Убираются ведущие нули из `result` (если есть).
 6.  **Возврат результата:** Возвращается список `result`, представляющий произведение чисел.
-![multiplication ](image02/image_01.png){ width=70% }
+![multiplication ](images8/multiplication.jpg){#fig:003 width=70%}
 
 ### 4. Функция `multiplication_alternative(num1, num2, base)`
 Эта функция выполняет альтернативный алгоритм умножения двух неотрицательных целых чисел в заданной системе счисления.
@@ -176,7 +190,7 @@ header-includes:
 3.  **Удаление ведущих нулей:** Убираются ведущие нули из `result` (если есть).
 4. **Возврат результата:** Возвращается список `result`, представляющий произведение чисел.
 
-![multiplication alternative ](images8/image_01.png){ width=70% }
+![multiplication alternative ](images8/multiplication_alternative.jpg){#fig:004 width=70%}
 
 ### 5. Функция `division(dividend, divisor, base)`
 
@@ -210,7 +224,7 @@ header-includes:
 4.  **Возврат результата:** Возвращается кортеж, содержащий частное (`quotient`) и остаток (`remainder`).
 
 
-![division  ](images8/image_01.png){ width=70% }
+![division  ](images8/division.jpg){#fig:005 width=70%}
 ### Заключение
 
 Эта лабораторная описывает функции `addition`, `subtraction`, `multiplication`, `multiplication_alternative`, и `division`, которые выполняют сложение, вычитание, умножение и деление неотрицательных целых чисел в заданной системе счисления. Эти функции используют стандартные алгоритмы для выполнения этих операций, работая с числами, представленными в виде строк цифр.

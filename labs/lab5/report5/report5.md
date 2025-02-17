@@ -1,56 +1,72 @@
 ---
-# Front matter
-lang: ru-RU
-title: "Лабораторная работа №5"
+## Front matter
+title: "Шаблон отчёта по лабораторной работе №5"
 subtitle: "Дисциплина: Математические основы защиты информации и информационной безопасности"
 author: "Миличевич Александра"
 
-# Formatting
+## Generic otions
+lang: ru-RU
 toc-title: "Содержание"
+
+## Bibliography
+bibliography: bib/cite.bib
+csl: pandoc/csl/gost-r-7-0-5-2008-numeric.csl
+
+## Pdf output format
 toc: true # Table of contents
-toc_depth: 2
-lof: true # Список рисунков
-lot: true # Список таблиц
+toc-depth: 2
+lof: true # List of figures
+lot: true # List of tables
 fontsize: 12pt
 linestretch: 1.5
-papersize: a4paper
-documentclass[english,russian]{babel}
-polyglossia-lang: russian
-polyglossia-otherlangs: english
-mainfont: Liberation Serif
-romanfont: Liberation Serif
-sansfont: Liberation Sans
-monofont: Liberation Mono
-mainfontoptions: Ligatures=TeX
-romanfontoptions: Ligatures=TeX
-sansfontoptions: Ligatures=TeX,Scale=MatchLowercase
-monofontoptions: Scale=MatchLowercase
+papersize: a4
+documentclass: scrreprt
+## I18n polyglossia
+polyglossia-lang:
+  name: russian
+  options:
+	- spelling=modern
+	- babelshorthands=true
+polyglossia-otherlangs:
+  name: english
+## I18n babel
+babel-lang: russian
+babel-otherlangs: english
+## Fonts
+mainfont: IBM Plex Serif
+romanfont: IBM Plex Serif
+sansfont: IBM Plex Sans
+monofont: IBM Plex Mono
+mathfont: STIX Two Math
+mainfontoptions: Ligatures=Common,Ligatures=TeX,Scale=0.94
+romanfontoptions: Ligatures=Common,Ligatures=TeX,Scale=0.94
+sansfontoptions: Ligatures=Common,Ligatures=TeX,Scale=MatchLowercase,Scale=0.94
+monofontoptions: Scale=MatchLowercase,Scale=0.94,FakeStretch=0.9
+mathfontoptions:
+## Biblatex
+biblatex: true
+biblio-style: "gost-numeric"
+biblatexoptions:
+  - parentracker=true
+  - backend=biber
+  - hyperref=auto
+  - language=auto
+  - autolang=other*
+  - citestyle=gost-numeric
+## Pandoc-crossref LaTeX customization
+figureTitle: "Рис."
+tableTitle: "Таблица"
+listingTitle: "Листинг"
+lofTitle: "Список иллюстраций"
+lotTitle: "Список таблиц"
+lolTitle: "Листинги"
+## Misc options
 indent: true
-pdf-engine: pdflatex
 header-includes:
-  - \usepackage[utf8]{inputenc}
-  - \usepackage[russian]{babel}
-  - \linepenalty=10 # the penalty added to the badness of each line within a paragraph (no associated penalty node) Increasing the value makes tex try to have fewer lines in the paragraph.
-  - \interlinepenalty=0 # value of the penalty (node) added after each line of a paragraph.
-  - \hyphenpenalty=50 # the penalty for line breaking at an automatically inserted hyphen
-  - \exhyphenpenalty=50 # the penalty for line breaking at an explicit hyphen
-  - \binoppenalty=700 # the penalty for breaking a line at a binary operator
-  - \relpenalty=500 # the penalty for breaking a line at a relation
-  - \clubpenalty=150 # extra penalty for breaking after first line of a paragraph
-  - \widowpenalty=150 # extra penalty for breaking before last line of a paragraph
-  - \displaywidowpenalty=50 # extra penalty for breaking before last line before a display math
-  - \brokenpenalty=100 # extra penalty for page breaking after a hyphenated line
-  - \predisplaypenalty=10000 # penalty for breaking before a display
-  - \postdisplaypenalty=0 # penalty for breaking after a display
-  - \floatingpenalty = 20000 # penalty for splitting an insertion (can only be split footnote in standard LaTeX)
-  - \raggedbottom # or \flushbottom
+  - \usepackage{indentfirst}
   - \usepackage{float} # keep figures where there are in the text
-  - \floatplacement{figure}{H} # keep figures where there are in the text 
+  - \floatplacement{figure}{H} # keep figures where there are in the text
 ---
-| **Дисциплина** | **Лабораторная**| **ФИО** |
-| ------ | ------ | ------- |
-| Математические основы защиты информации и информационной безопасности|  №5| Александра Миличевич |
-
 
 ## Цель лабораторной 
 
@@ -75,7 +91,7 @@ header-includes:
 5.  Если `a^(number - 1) % number` не равно 1, то это означает, что число `number` составное. Функция выводит сообщение "Число составное" и возвращает `False`.
 6.  Если все проверки пройдены, то это говорит о том, что число, вероятно, простое. Функция выводит сообщение "Число, вероятно, простое" и возвращает `True`.
 
-![ тест Ферма](images5/fermat_test.jpg){ width=70% }
+![ тест Ферма](images5/fermat_test.jpg){#fig:001 width=70%}
 
 
 #### Важные замечания:
@@ -102,7 +118,7 @@ header-includes:
     *   `exponent` делится на 2 (`exponent //= 2`).
 6.  Функция возвращает значение `result`, которое равно `(base^exponent) % modulus`.
 
-![ модуло алгоритм](images5/modular_exponentiation.jpg){ width=70% }
+![ модуло алгоритм](images5/modular_exponentiation.jpg){#fig:002 width=70%}
 
 #### Важные замечания:
 
@@ -150,7 +166,7 @@ header-includes:
 ### Заключение
 
 Этот документ описывает функцию `jacobi_symbol(a, n)`, которая вычисляет символ Якоби (a/n) для заданных целых чисел `a` и `n`. Эта функция использует ряд математических свойств, чтобы эффективно вычислить символ Якоби, и важна в теории чисел и криптографии.
-![ Якоби алгоритм](images5/jacobi_symboljpg.jpg){ width=70% }
+![ Якоби алгоритм](images5/jacobi_symboljpg.jpg){#fig:003 width=70%}
 
 ## Тест Соловэя-Штрассена для проверки простоты
 
@@ -189,7 +205,7 @@ header-includes:
 ### Заключение
 
 Функция `solovay_strassen_test` предоставляет способ проверить, является ли нечетное число, вероятно, простым. Она использует случайные числа, символ Якоби и модульное возведение в степень для проведения теста
-![ соловей штрассен алгоритм](images5/solovay_strassen_test.jpg){ width=70%}
+![ соловей штрассен алгоритм](images5/solovay_strassen_test.jpg){#fig:004 width=70%}
 
 
 ## Тесты простоты чисел: Миллера-Рабина и другие
@@ -222,7 +238,7 @@ header-includes:
     *   Если для какого-то `a` функция `trial_composite(a)` вернула `False`, то число составное, и возвращается `False`.
 6.  **Число, вероятно, простое:** Если все 8 тестов пройдены, то число, вероятно, простое и возвращается `True`.
 
-![ миллера рабина алгоритм](images5/miller_rabin_test.jpg){ width=70%}
+![ миллера рабина алгоритм](images5/miller_rabin_test.jpg){#fig:005 width=70%}
 
 #Вывод
 
